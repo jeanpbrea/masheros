@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+        {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=Admin, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Admins portal</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}"  media="screen,projection"/>
+    <link rel="stylesheet"  href="{% static 'css/styleadmin.css' %}" /> 
+</head>
+    <body>
+        <div class="container white z-depth-2" style="width: 50%; height: 80%;">
+                <nav>
+                    <div class="nav-wrapper">
+                        <h1><a style=" margin-left:10px;" href="/" class="brand-logo">masheros</a></h1>
+                        <ul class="right hide-on-med-and-down">
+                            {% if request.session.user_id %}
+                            <li><p><a href="/dashboard/{{user.id}}">{{user.fname}}</a></p></li>
+                            <li><p><a href="/review">Write a Review</a></p></li>
+                            <li><p><a href="/logoff">Logout</a></p></li>
+                            {% elif not request.session.user_id %}
+                            <li><p><a href="/log">Login</a></p></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </nav>
+            <h2>User's on Masheros</h2>
+            <div id="main">
+                <table>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <!-- <th>Number of Reviews</th> -->
+                        <th>Actions</th>
+                    </tr>
+                    {% for u in users %}
+                    <tr>
+                        <td>{{u.id}}</td>
+                        <td><a href="dashboard/{{u.id}}">{{u.fname}} {{u.lname}}</td>
+                        <td>{{u.email}}</td>
+                        <td><button><a href="/deleteuser/{{u.id}}">Delete</a></button></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <h2>Active reviews on Masheros</h2>
+            <div id="main2">
+                <table>
+                    <tr>
+                        <th>Id</th>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Actions</th>
+                    </tr>
+                    {% for r in reviews %}
+                    <tr>
+                        <td>{{r.id}}</td>
+                        <td><a href="showreview/{{r.id}}">{{r.title}}</a></td>
+                        <td><a href="dashboard/{{r.author.id}}">{{r.author.fname}}</td>
+                        <td><button><a href="/deletereview/{{r.id}}">Delete</a></button></td>
+                    </tr>
+                    {% endfor %}
+                </table> 
+            </div>
+        </div>   
+    </body>
+</html>

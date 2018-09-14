@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+        {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Update Review for{{review.title}}</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}"  media="screen,projection"/>
+    <link rel="stylesheet"  href="{% static 'css/styleedit.css' %}" />
+</head>
+    <body>
+        <div class="container white z-depth-2" style="width: 70; height: 80%;">
+            <nav>
+                <div class="nav-wrapper">
+                    <h1><a style=" margin-left:10px;" href="/" class="brand-logo">masheros</a></h1>
+                    <ul class="right hide-on-med-and-down">
+                        {% if request.session.user_id %}
+                        <li><p><a href="/dashboard/{{user.id}}">{{user.fname}}</a></p></li>
+                        <li><p><a href="/review">Write a Review</a></p></li>
+                        <li><p><a href="/logoff">Logout</a></p></li>
+                        {% elif not request.session.user_id %}
+                        <li><p><a href="/log">Login</a></p></li>
+                    {% endif %}
+                    </ul>
+                </div>
+            </nav>
+            <h1>Update your review for {{review.title}}</h1>
+            <form action="/reviewedit/{{review.id}}" method="post">
+                {% csrf_token %}
+                <p>Review Text:</p><textarea name ="text" style="height: 400px; width: 1200px; margin-left: 30px;">{{review.text}}</textarea>
+                <p><input type="submit" value="Update!"></p>            
+            </form>
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+    </body>
+</html>

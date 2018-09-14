@@ -1,0 +1,9 @@
+body {
+    background-image: url("/static/img/bg1.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+p {
+    margin-left: 30px;
+}

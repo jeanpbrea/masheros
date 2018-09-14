@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+        {% load static %}
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>MASHEROS | Opinions on games and other stuff.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}"  media="screen,projection"/>
+    <link rel="stylesheet"  href="{% static 'css/stylehome.css' %}" />    
+</head>
+<body>
+    <div class="container white z-depth-2" style="width: 70; height: 80%;">
+            <nav>
+                <div class="nav-wrapper">
+                        <h1><a style=" margin-left:10px;" href="/" class="brand-logo">masheros</a></h1>
+                    <ul class="right hide-on-med-and-down">
+                        {% if user.user_level == 7 %}
+                        <li><p><a href="/admin">ADMIN PORTAL</a></p></li>
+                        {% endif %}
+                        {% if request.session.user_id %}
+                        <li><p><a href="/dashboard/{{user.id}}">{{user.fname}}</a></p></li>
+                        <li><p><a href="/review">Write a Review</a></p></li>
+                        <li><p><a href="/logoff">Logout</a></p></li>
+                        {% elif not request.session.user_id %}
+                        <li><p><a href="/log">Login</a></p></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </nav>
+            <div id="main">
+                {% for r in allreviews %}
+                <div id="title">
+                    <h2 class="center-align"><a href="showreview/{{r.id}}">{{r.title}}</a></h2>
+                </div>
+                <div id ="author_header">
+                    <ul id ="authornav">
+                        <li class="authoritem"><p>{{r.created_at|date }}</p></li>
+                        <li class="authoritem"><p>Posted by: <a href="dashboard/{{r.author.id}}">{{r.author.fname}}</a></p></li>
+                        <li class="authoritema"><p>Rating:{{r.rating}}/5</p></li> 
+                    </ul>
+                </div>
+                <p class="center-align"><img class="mainimg" src="{{r.picture.url}}"></p>
+                <p id="reviewtext">{{r.text}}</p>
+                <div id="commentgo">
+                    <p class="commentlink" ><a href="/showreview/{{r.id}}"><img class="iconimg" src="/static/img/commenticon.png" alt="" srcset="">     Leave a Comment</a></p>
+                </div>
+                <hr>
+                {% endfor %}
+            </div>  
+    </div>
+</body>
+</html>

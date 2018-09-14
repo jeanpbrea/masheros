@@ -1,0 +1,62 @@
+body {
+    background-image: url("/static/img/bg1.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+#main {
+    background: lightgray;
+    border-radius: 10px;
+    margin: 40px;  
+}
+
+#title {
+    margin:30px;
+    padding: 10px;   
+}
+
+#author_header {
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+#authornav {
+    border-radius: 10px;
+    background: darkgrey;
+}
+.authoritem {
+    margin: 0px 5px 0px 5px;
+    display: inline-block;
+}
+.authoritema{
+    margin-left: 65%;
+    display: inline-block;
+}
+.mainimg {
+    width:500px;
+    height:300px;
+}
+
+
+#reviewtext{
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-bottom: 60px;
+}
+@media screen and (min-width: 480px) {
+    #reviewtext {
+      font-size: 15px;
+    }
+  }
+
+#commentgo{
+    text-align: right
+}
+.commentlink{
+    margin-right: 50px;
+    
+}
+.iconimg{
+    width:15px;
+    height: 15px;
+}

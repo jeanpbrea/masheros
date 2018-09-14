@@ -1,0 +1,16 @@
+body {
+    background-image: url("/static/img/bg1.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+#main {
+    background: lightgray;
+    border-radius: 10px;
+    margin: 40px;  
+}
+
+#main2 {
+    background: lightgray;
+    border-radius: 10px;
+    margin: 40px;  
+}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+        {% load static %}
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Game Review</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}"  media="screen,projection"/>
+    <link rel="stylesheet"  href="{% static 'css/stylehome.css' %}" /> 
+</head>
+    <body>
+        <div class="container white z-depth-2">
+            <nav>
+                <div class="nav-wrapper">
+                        <h1><a style=" margin-left:10px;" href="/" class="brand-logo">masheros</a></h1>
+                        <ul class="right hide-on-med-and-down">
+                            {% if request.session.user_id %}
+                            <li><p><a href="/dashboard/{{user.id}}">{{user.fname}}</a></p></li>
+                            <li><p><a href="/review">Write a Review</a></p></li>
+                            <li><p><a href="/logoff">Logout</a></p></li>
+                            {% elif not request.session.user_id %}
+                            <li><p><a href="/log">Login</a></p></li>
+                        {% endif %}
+                    </ul>
+                </div>
+                </nav>
+                    <h1 style="margin: 30px;">Write your review</h1>
+                    <form enctype="multipart/form-data" action="/reviewcreate" method="post" style="margin: 30px;">
+                        {% csrf_token %}
+                        <p>Title<input type="text" name="title"></p>
+                        <p>Rating up too 5<input type="number" name="rating"></p>
+                        <p>Review Text</p><textarea style="height: 400px; width: 1000px; margin-left: 30px;" name ="text"></textarea>
+                        <p>Cover Image<input type="file" accept="image/*" name="picture"/></p> 
+                        <p ><input type="submit" value="Upload"></p>   
+                        <br>        
+                    </form>
+        </div>
+        <div id="errors">
+            {% if messages %}
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </body>
+</html>

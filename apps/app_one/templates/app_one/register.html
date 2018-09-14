@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+        {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sign Up</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}"  media="screen,projection"/>
+    <link rel="stylesheet"  href="{% static 'css/styles.css' %}" />
+</head>
+<body>
+    <div class="container grey lighten-3 z-depth-2">
+        <div id="Register" class="col s12">
+            <form class="col s12" action="/register" method="POST"> 
+                <div class="form-container"> 
+                        <h3 class="teal-text">Sign Up!</h3>
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <p><input type="text" name="fname" placeholder= "First Name"></p>
+                        </div>
+                        <div class="input-field col s6">
+                            <p><input type="text" name="lname" placeholder = "Last Name"></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <p><input type="email" name="email" placeholder="Email"></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <p><input type="password" name="password" placeholder="Password"></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <p><input type="password" name="confirm" placeholder="Confrim Password"></p>
+                        </div>
+                    </div>    
+                    <center>
+                        <button class="btn waves-effect waves-light teal" type="submit" name="action">Register!</button>
+                    </center>
+                </div>
+            </form>
+        </div>
+    <div id="errors" >
+        {% if messages %}
+        {% for message in messages %}
+            <p style = "color:red">{{ message }}</p>
+        {% endfor %}
+        {% endif %}
+    </div>
+    </div>  
+</body>
+</html>
